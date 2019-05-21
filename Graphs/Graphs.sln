@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friends", "..\Friends\Frien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicTransport", "..\PublicTransport\PublicTransport.csproj", "{DA17DDFF-2D1F-43EE-AB26-75B981723DBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphImplementation", "..\GraphImplementation\GraphImplementation.csproj", "{426D1258-AB9C-4274-8054-613E13AD76D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DA17DDFF-2D1F-43EE-AB26-75B981723DBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA17DDFF-2D1F-43EE-AB26-75B981723DBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA17DDFF-2D1F-43EE-AB26-75B981723DBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426D1258-AB9C-4274-8054-613E13AD76D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426D1258-AB9C-4274-8054-613E13AD76D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426D1258-AB9C-4274-8054-613E13AD76D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426D1258-AB9C-4274-8054-613E13AD76D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
