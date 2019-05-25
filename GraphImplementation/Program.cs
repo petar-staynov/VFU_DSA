@@ -5,9 +5,6 @@ namespace GraphImplementation
 {
     class Program
     {
-        /*
-         * https://introprogramming.info/wp-content/uploads/2013/07/clip_image034_thumb.png
-         */
         private static readonly Graph Graph = new Graph(new List<int>[]
         {
             new List<int>() {3, 6}, // successors of vertice 0
@@ -35,8 +32,11 @@ namespace GraphImplementation
                 IList<int> childNodes = Graph.GetChildren(currentNode);
                 foreach (int childNode in childNodes)
                 {
-                    stack.Push(childNode);
-                    visited[childNode] = true;
+                    if (!visited[childNode])
+                    {
+                        stack.Push(childNode);
+                        visited[childNode] = true;
+                    }
                 }
             }
         }
@@ -73,27 +73,29 @@ namespace GraphImplementation
 
                 foreach (int childNode in childrenNodes)
                 {
-                    queue.Enqueue(childNode);
-                    visited[childNode] = true;
+                    if (!visited[childNode])
+                    {
+                        queue.Enqueue(childNode);
+                        visited[childNode] = true;
+                    }
                 }
             }
         }
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Connected graph components (DFS): ");
-            bool[] visited = new bool[Graph.Size];
-            for (int node = 0; node < Graph.Size; node++)
-            {
-                if (!visited[node])
-                {
-                    TraverseDFSRecursive(node, visited);
-                    Console.WriteLine();
-                }
-            }
-
-            Console.WriteLine("Breadth-First Search (BFS) traversal: ");
+            Console.Write("Breadth-First Search (BFS) traversal: ");
             TraverseBFS(0);
+            Console.WriteLine();
+
+            Console.Write("Depth-First Search (DFS) traversal (with stack): ");
+            TraverseDFS(0);
+            Console.WriteLine();
+
+            Console.Write("Depth-First Search (DFS) traversal (recursive): ");
+            bool[] visited = new bool[Graph.Size];
+            TraverseDFSRecursive(0, visited);
+            Console.WriteLine();
         }
     }
 }
