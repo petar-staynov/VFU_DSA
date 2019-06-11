@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSA_Exam_Problem1", "..\DSA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSA_Exam_Problem2", "..\DSA_Exam_Problem2\DSA_Exam_Problem2.csproj", "{A61C9472-3E1F-4624-A611-60115CB27266}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSA_Exam_Problem2_NEW", "..\DSA_Exam_Problem2_NEW\DSA_Exam_Problem2_NEW.csproj", "{07CD0B91-1BB2-4A86-8691-4A34A7E5ABBC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +51,6 @@ Global
 		{A61C9472-3E1F-4624-A611-60115CB27266}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A61C9472-3E1F-4624-A611-60115CB27266}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A61C9472-3E1F-4624-A611-60115CB27266}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07CD0B91-1BB2-4A86-8691-4A34A7E5ABBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07CD0B91-1BB2-4A86-8691-4A34A7E5ABBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07CD0B91-1BB2-4A86-8691-4A34A7E5ABBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07CD0B91-1BB2-4A86-8691-4A34A7E5ABBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,29 @@ namespace DSA_Exam_Problem2
 {
     class Program
     {
+        private readonly string exampleInput1 = @"
+4
+1 2 6
+1 6
+6
+0
+
+1 2 3
+x
+";
+
+        private readonly string exampleInput2 = @"
+1 2
+
+
+4
+3
+5
+
+x
+";
+
+
         private static Graph _graph;
         private static bool[] visited;
 
@@ -31,63 +54,71 @@ namespace DSA_Exam_Problem2
         static void Main(string[] args)
         {
             Console.WriteLine(
-                "Enter graph components in format \"nodeNumber nodeNumber nodeNumber\". ex: \"1 2 6\". Type \"x\" to exit");
+                "Input follows the format \"nodeNumber nodeNumber nodeNumber\". ex: \"1 2 6\".");
 
             List<List<int>> graphComponents = new List<List<int>>();
 
-            int currentNode = 0;
-            while (true)
+            Console.WriteLine();
+            Console.WriteLine("Enter number of nodes/vertices");
+            int numberOfNodes = int.Parse(Console.ReadLine());
+
+            for (int currentNode = 0; currentNode <= numberOfNodes; currentNode++)
             {
                 /*
                  *
                  *GRAPH COMPONENTS INPUT
                  *
                  */
-                Console.Write($"Enter children of node{currentNode}: ");
+                Console.Write($"Enter successors of vertice {currentNode} (press enter to create isolated vertice): ");
                 string input = Console.ReadLine();
-                if (input == "x") break;
-
 
                 List<int> graphComponent = new List<int>();
 
                 int[] nodeInfo;
                 try
                 {
-                    nodeInfo = input.Split(' ').Select(int.Parse).ToArray();
+                    if (input.Length == 0)
+                    {
+                        Console.WriteLine("Isolated vertice added");
+                        nodeInfo = new int[0];
+                    }
+                    else
+                    {
+                        nodeInfo = input.Split(' ').Select(int.Parse).ToArray();
+                    }
+
+
+                    foreach (int nodeNumber in nodeInfo)
+                    {
+                        if (nodeNumber > numberOfNodes)
+                        {
+                            Console.WriteLine("Node number cannot be greater than the total amount of nodes.");
+                            currentNode--;
+                            throw new Exception();
+                        }
+
+                        graphComponent.Add(nodeNumber);
+                    }
+
+                    graphComponents.Add(graphComponent);
+
+
+                    Console.WriteLine();
                 }
                 catch (Exception)
                 {
-                    //Create node with no connections on invalid input
-                    Console.WriteLine("Disconnected node added");
-                    nodeInfo = new int[0];
+                    Console.WriteLine("Invalid input, try again!");
                 }
-
-                foreach (int nodeNumber in nodeInfo)
-                {
-                    graphComponent.Add(nodeNumber);
-                }
-
-                graphComponents.Add(graphComponent);
-                currentNode++;
-                Console.WriteLine();
             }
 
             //CREATE GRAPH
-            var temp = new Graph(graphComponents);
-            _graph = temp;
+            _graph = new Graph(graphComponents);
             visited = new bool[_graph.Size];
             Console.WriteLine();
 
-            /*
-             *
-             *GRAPH TRAVERSAL
-             *
-             */
+            //FIND CONNECTED GRAPH COMPONENTS USING RECURSIVE DFS
             Console.WriteLine("Connected graph components: ");
-
             componentsLength = new List<int>();
-
-
             for (int v = 0; v < _graph.Size; v++)
             {
                 currentComponent = v;
@@ -101,33 +132,33 @@ namespace DSA_Exam_Problem2
             }
 
             Console.WriteLine();
+
+            //FIND LENGTHS OF CONNECTED COMPONENTS
+            Dictionary<int, int> lengthOccurrences = new Dictionary<int, int>();
             for (int currComp = 0; currComp < componentsLength.Count; currComp++)
             {
-                //if (componentsLength[currComp] == 0) continue;
+                if (componentsLength[currComp] == 0) continue;
 
-                Console.WriteLine($"component{currComp} length = {componentsLength[currComp]}");
-                currentComponent++;
+                int componentLength = componentsLength[currComp];
+                //Console.WriteLine($"component{currComp} length = {componentLength}");
+
+                if (!lengthOccurrences.ContainsKey(componentLength))
+                {
+                    lengthOccurrences[componentLength] = 1;
+                }
+                else
+                {
+                    lengthOccurrences[componentLength]++;
+                }
             }
 
             Console.WriteLine();
 
-            Console.WriteLine($"Number of components with same length:");
-            var lengthsOccurences = new Dictionary<int, int>();
-            foreach (var num in componentsLength)
+            //PRINT NUMBER OF OCCURRENCES OF EACH LENGTH
+            foreach (KeyValuePair<int, int> lengthOccurrence in lengthOccurrences)
             {
-                if (!lengthsOccurences.ContainsKey(num))
-                {
-                    lengthsOccurences.Add(num, 0);
-                }
-
-                lengthsOccurences[num]++;
-            }
-
-            foreach (var kvp in lengthsOccurences)
-            {
-                //if (kvp.Key < 2) continue;
-
-                Console.WriteLine($"{kvp.Value} components with a length of {kvp.Key}");
+                Console.WriteLine(
+                    $"There are {lengthOccurrence.Value} components with a length of {lengthOccurrence.Key}");
             }
         }
     }

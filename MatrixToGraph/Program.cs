@@ -8,10 +8,11 @@ namespace MatrixToGraph
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Enter number of nodes");
             int nodes = int.Parse(Console.ReadLine());
             int[,] matrix = new int[nodes,nodes];
 
-            Console.WriteLine(nodes-1);
+            Console.WriteLine("Enter Adjacency matrix in format \"0 0 1 0\"");
             List<string> results = new List<string>();
             for (int row = 0; row < nodes; row++)
             {
