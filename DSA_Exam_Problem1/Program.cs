@@ -8,26 +8,10 @@ namespace DSA_Exam_Problem1
     {
         static void Main(string[] args)
         {
-            //string input = Console.ReadLine();
-
-//            string input = @"asd = 
-//s = (a+b+c)/2
-//area = √(s(s-a)*(s-b)*(s-c))
-//
-//conv_fac = 0.621371
-//
-//# calculate miles
-//miles = kilometers * conv_fac
-//print('%0.3f kilometers is equal to %0.3f miles' %(kilometers,miles))
-//
-//num = int(input(""Enter a number: ""))
-//if (num % 2) == 0:
-//   print(""{0} is Even"".format(num))
-//else:
-//   print(""{0} is Odd"".format(num))
-//num = 0";
-
-
+            /*
+             * INPUT STRING
+             * replace text inside the "" with your python source code
+             */
             string input = @"
 #!/usr/bin/env python27
 
@@ -65,16 +49,25 @@ print json.dumps(response,indent=2)
 ";
 
 
-            //Pattern to match variable declaration
-            string pattern = @"[a-zA-Z_][a-zA-Z_$0-9]* =";
+            /*
+             *REGEX PATTERN
+             *"?<var_name>" - group name
+             *"([\w]+)" - group - match any character A-Z, a-z, 0-9 one or more times
+             *"(?: =)" - non capture group - match " =" exactly
+             * "|" - or
+             *"(?: for )" - non capture group - match "for " exactly
+             *"([\w]+)" - group - match any character A-Z, a-z, 0-9 one or more times
+             *"(?: in)" - non capture group - match " in" exactly
+             *see https://regex101.com/ for more info
+             */
+            string pattern = @"(?<var_name>[\w]+)(?: =)|(?: for )(?<var_name>[\w]+)(?: in)";
             RegexOptions options = RegexOptions.Multiline;
 
-
             Dictionary<string, int> matchesCount = new Dictionary<string, int>();
-            foreach (Match m in Regex.Matches(input, pattern, options))
+            foreach (Match match in Regex.Matches(input, pattern, options))
             {
-                //trims last two characters of match which are " ="
-                string variableName = m.Value.Substring(0, m.Value.Length - 2);
+                //Get string that corresponds to match of the "var_name" group
+                string variableName = match.Groups["var_name"].ToString();
 
                 if (!matchesCount.ContainsKey(variableName))
                 {
@@ -85,7 +78,8 @@ print json.dumps(response,indent=2)
                     matchesCount[variableName]++;
                 }
 
-                Console.WriteLine($"'{m.Value}' found at index {m.Index}.");
+                /*debug stuff*/
+                Console.WriteLine($"'{match.Value}' found at index {match.Index}.");
             }
 
             Console.WriteLine();
